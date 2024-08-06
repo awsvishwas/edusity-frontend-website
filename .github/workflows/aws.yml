@@ -66,7 +66,10 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "image=$ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+        docker build -t aws-ecs-task-test .
+        docker tag aws-ecs-task-test:latest 590183895361.dkr.ecr.us-east-1.amazonaws.com/aws-ecs-task-test:latest
+        docker push 590183895361.dkr.ecr.us-east-1.amazonaws.com/aws-ecs-task-test:latest
+
+  
+        
 
