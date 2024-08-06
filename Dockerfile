@@ -1,15 +1,11 @@
-FROM node:18-alpine as build
-
+# Stage 1: Build
+FROM node:14 AS build
 WORKDIR /app
-
-COPY package*.json ./
-
+COPY package.json package-lock.json ./
 RUN npm install
-
-COPY src/ src/
-
+COPY . .
 RUN npm run build
 
-
+# Stage 2: Serve
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
